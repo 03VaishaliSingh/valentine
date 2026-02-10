@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Be My Valentine 💖</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .card {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      max-width: 400px;
+    }
+    h1 {
+      color: #e63946;
+    }
+    button {
+      margin-top: 20px;
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      background: #e63946;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #d62839;
+    }
+    img {
+      margin-top: 20px;
+      max-width: 100%;
+      border-radius: 15px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Will you be my Valentine? 💘</h1>
+    <button onclick="showLove()">YES 💖</button>
+    <img id="photo" src="us.jpg" alt="Us together">
+  </div>
+
+  <script>
+    function showLove() {
+      document.getElementById("photo").style.display = "block";
+    }
+  </script>
+</body>
+</html>
