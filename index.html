@@ -1,61 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Be My Valentine 💖</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-      font-family: 'Segoe UI', sans-serif;
-    }
-    .card {
-      background: white;
-      padding: 40px;
-      border-radius: 20px;
-      text-align: center;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-      max-width: 400px;
-    }
-    h1 {
-      color: #e63946;
-    }
-    button {
-      margin-top: 20px;
-      padding: 15px 30px;
-      font-size: 18px;
-      border: none;
-      border-radius: 30px;
-      background: #e63946;
-      color: white;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #d62839;
-    }
-    img {
-      margin-top: 20px;
-      max-width: 100%;
-      border-radius: 15px;
-      display: none;
-    }
-  </style>
-</head>
-<body>
-  <div class="card">
-    <h1>Will you be my Valentine? 💘</h1>
-    <button onclick="showLove()">YES 💖</button>
-    <img id="photo" src="us.jpg" alt="Us together">
-  </div>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Be My Valentine 💘</title>
 
-  <script>
-    function showLove() {
-      document.getElementById("photo").style.display = "block";
+<style>
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(180deg, #ff9a9e, #fecfef);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+    overflow: hidden;
+}
+
+/* Card */
+.card {
+    width: 90%;
+    max-width: 380px;
+    background: rgba(255,255,255,0.96);
+    border-radius: 28px;
+    padding: 28px 22px 32px;
+    text-align: center;
+    box-shadow: 0 30px 60px rgba(255, 0, 90, 0.25);
+    animation: slideUp 0.9s ease;
+    position: relative;
+    z-index: 5;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(40px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+h1 {
+    font-size: 26px;
+    color: #ff1e56;
+    margin-bottom: 10px;
+}
+
+#message {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 22px;
+}
+
+/* Buttons */
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+}
+
+button {
+    flex: 1;
+    padding: 14px;
+    border-radius: 999px;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+#yesBtn {
+    background: linear-gradient(135deg, #ff4d6d, #ff1e56);
+    color: white;
+}
+
+#yesBtn:active {
+    transform: scale(1.08);
+}
+
+#noBtn {
+    background: #f1f1f1;
+    color: #444;
+}
+
+/* Photo reveal */
+#photo {
+    display: none;
+    margin-top: 22px;
+    animation: fadeIn 1.2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+#photo img {
+    width: 100%;
+    border-radius: 22px;
+    box-shadow: 0 0 35px rgba(255, 30, 86, 0.55);
+}
+
+/* Falling hearts */
+.heart {
+    position: absolute;
+    font-size: 18px;
+    animation: fall linear infinite;
+    opacity: 0.9;
+}
+
+@keyframes fall {
+    0% { transform: translateY(-10vh); }
+    100% { transform: translateY(110vh); }
+}
+
+/* Sparkles */
+.sparkle {
+    position: absolute;
+    font-size: 14px;
+    animation: sparkle 1.8s ease forwards;
+}
+
+@keyframes sparkle {
+    0% { opacity: 1; transform: scale(0); }
+    100% { opacity: 0; transform: scale(2); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>💘 Be My Valentine?</h1>
+    <div id="message">Tap carefully… your heart is on the line 🫶</div>
+
+    <div class="buttons">
+        <button id="yesBtn" onclick="sayYes()">YES 💖</button>
+        <button id="noBtn" ontouchstart="runAway()">NO 🙈</button>
+    </div>
+
+    <div id="photo">
+        <h2>Us. Right Here. 💞</h2>
+        <img src="YOUR_IMAGE_URL_HERE" alt="Us together">
+    </div>
+</div>
+
+<script>
+let noTexts = [
+    "Nope 😜",
+    "Missed 😏",
+    "Try again 😈",
+    "Almost 😅",
+    "Not today 😂"
+];
+
+function runAway() {
+    const noBtn = document.getElementById("noBtn");
+    noBtn.innerText = noTexts[Math.floor(Math.random() * noTexts.length)];
+    noBtn.style.position = "absolute";
+    noBtn.style.left = Math.random() * 65 + "%";
+    noBtn.style.top = Math.random() * 70 + "%";
+}
+
+function sayYes() {
+    document.getElementById("message").innerText =
+        "Best. Choice. Ever. 💕🥰";
+    document.getElementById("photo").style.display = "block";
+    document.querySelector(".buttons").style.display = "none";
+    celebrate();
+}
+
+/* Falling hearts */
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = Math.random() > 0.5 ? "❤️" : "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 22 + 14 + "px";
+    heart.style.animationDuration = Math.random() * 3 + 4 + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 7000);
+}, 300);
+
+/* Sparkle celebration */
+function celebrate() {
+    for (let i = 0; i < 35; i++) {
+        const s = document.createElement("div");
+        s.className = "sparkle";
+        s.innerHTML = "✨";
+        s.style.left = Math.random() * 100 + "vw";
+        s.style.top = Math.random() * 100 + "vh";
+        document.body.appendChild(s);
+        setTimeout(() => s.remove(), 1800);
     }
-  </script>
+}
+</script>
+
 </body>
 </html>
